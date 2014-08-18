@@ -1,0 +1,32 @@
+;
+; HideDir.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=
+ClassGuid=
+Provider=
+DriverVer=08/18/2014,17.36.11.314
+CatalogFile=
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTx86
+
+[Standard.NTx86]
+
+
+[Strings]
+ManufacturerName=""
+ClassName=""
+DiskName="HideDir Source Disk"

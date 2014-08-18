@@ -1,0 +1,1 @@
+设置文件不可修改 ~~ HOOK NtSetSecurityObject 拒绝对指定文件的修改
