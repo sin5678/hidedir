@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ;
 ; HideDir.inf
 ;
@@ -8,7 +7,7 @@ Signature="$WINDOWS NT$"
 Class=
 ClassGuid=
 Provider=
-DriverVer=08/20/2014,14.35.29.631
+DriverVer=08/22/2014,17.37.2.924
 CatalogFile=
 
 [DestinationDirs]
@@ -31,37 +30,3 @@ DefaultDestDir = 12
 ManufacturerName=""
 ClassName=""
 DiskName="HideDir Source Disk"
-=======
-;
-; HideDir.inf
-;
-
-[Version]
-Signature="$WINDOWS NT$"
-Class=
-ClassGuid=
-Provider=
-DriverVer=08/20/2014,23.36.36.712
-CatalogFile=
-
-[DestinationDirs]
-DefaultDestDir = 12
-
-
-[SourceDisksNames]
-1 = %DiskName%,,,""
-
-[SourceDisksFiles]
-
-
-[Manufacturer]
-%ManufacturerName%=Standard,NTx86
-
-[Standard.NTx86]
-
-
-[Strings]
-ManufacturerName=""
-ClassName=""
-DiskName="HideDir Source Disk"
->>>>>>> cc4b3388688e47927894d3a1f271efe733c15014

@@ -1,7 +1,2 @@
-<<<<<<< HEAD
 #TargetFrameworkVersion=v4.5:PlatformToolSet=WindowsKernelModeDriver8.1:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit
 Win8 Debug|Win32|X:\hidedir\HideDir\|
-=======
-#TargetFrameworkVersion=v4.5:PlatformToolSet=WindowsKernelModeDriver8.1:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit
-Win8 Debug|Win32|D:\project\hidedir\HideDir\|
->>>>>>> cc4b3388688e47927894d3a1f271efe733c15014
