@@ -1,1 +1,1 @@
-设置文件不可修改 ~~ HOOK NtSetSecurityObject 拒绝对指定文件的修改
+有个 BUG 就是直接从网络共享文件夹访问 隐藏失效 看来 API HOOK 真是低级的手法
